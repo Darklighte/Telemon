@@ -201,7 +201,9 @@ sdist/
 develop-eggs/
 .installed.cfg
 
+########################
 # Unity .gitignore file.
+########################
 .DS_Store
 Library
 Library/*
@@ -211,6 +213,11 @@ Library/*
 Temp
 *.pidb
 Build
+
+#################
+#Eclipse
+#################
+.metadata
 
 # Installer logs
 pip-log.txt
