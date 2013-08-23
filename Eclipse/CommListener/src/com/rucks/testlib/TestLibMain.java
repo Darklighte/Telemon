@@ -14,7 +14,7 @@ public class TestLibMain extends UnityPlayerActivity
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_test_lib_main);
      
-        //start services here.
+        //start listener code here
         Intent SMSInServiceIntent = new Intent();
         SMSInServiceIntent.setAction(SMSListenerService.ACTION);
         startService(new Intent(this, SMSListenerService.class));

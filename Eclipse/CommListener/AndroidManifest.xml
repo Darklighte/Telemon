@@ -29,7 +29,7 @@
         	android:label="SMSInListenerService" >
     	</service>
     
-        <receiver android:name=".MySMSReciever"> 
+        <receiver android:name="com.rucks.testlib.SMSListenerIn"> 
         	<intent-filter> 
            	 <action android:name=
                 "android.provider.Telephony.SMS_RECEIVED" /> 
