@@ -1,5 +1,6 @@
 package com.rucks.testlib;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -12,6 +13,11 @@ public class TestLibMain extends UnityPlayerActivity
     {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_test_lib_main);
+     
+        //start services here.
+        Intent SMSInServiceIntent = new Intent();
+        SMSInServiceIntent.setAction(SMSListenerService.ACTION);
+        startService(new Intent(this, SMSListenerService.class));
     }
 
     @Override
