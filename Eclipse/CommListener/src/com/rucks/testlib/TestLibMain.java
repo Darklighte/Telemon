@@ -7,6 +7,11 @@ import com.unity3d.player.UnityPlayerActivity;
 
 public class TestLibMain extends UnityPlayerActivity 
 {
+	static
+	{
+		System.loadLibrary("commsetup");
+	}
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
@@ -21,4 +26,9 @@ public class TestLibMain extends UnityPlayerActivity
         getMenuInflater().inflate(R.menu.test_lib_main, menu);
         return true;
     }
+    
+    private native void printLog(String logThis);
+	
+	private native int fibonacci(int value);
+
 }
