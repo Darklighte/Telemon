@@ -1,5 +1,7 @@
 package com.rucks.testlib;
 
+import com.unity3d.player.UnityPlayer;
+
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,6 +32,11 @@ public class SMSListenerService extends Service
 /**
  * Public methods
  */
+	public SMSListenerService()
+	{
+		
+	}
+	
 	@Override
 	public void onCreate()
 	{
@@ -51,7 +58,7 @@ public class SMSListenerService extends Service
         registerReceiver(incomingSMSListener, theFilter);
         
         //register outgoing sms contentobserver
-        outListener = new SMSListenerOut(new Handler());
+        outListener = new SMSListenerOut(new Handler(), this);
         contentResolver = getContentResolver();
         contentResolver.registerContentObserver(Uri.parse("content://sms"),true, outListener);
 	}
@@ -78,5 +85,6 @@ public class SMSListenerService extends Service
 		//this should eventually call Unity stuff.
 		// TODO: Call actual game stuff once this has been verified to work.
         Toast.makeText(this, "SMSCount++!", Toast.LENGTH_LONG).show();
+        UnityPlayer.UnitySendMessage("GameObjectName1", "MethodName1", "Message to send");
     }
 }

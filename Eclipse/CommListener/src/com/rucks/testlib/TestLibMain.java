@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
 
 public class TestLibMain extends UnityPlayerActivity 
-{
+{	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
