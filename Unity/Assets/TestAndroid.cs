@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 using System;
+//using Commsetup;
 
 public class TestAndroid : MonoBehaviour {
 	
@@ -23,7 +24,7 @@ public class TestAndroid : MonoBehaviour {
 //			jc.CallStatic("UnitySendMessage", "Main Camera", "JavaMessage", "whoowhoo"); 
 //		} 
 		
-		if( System.IO.File.Exists("libcommsetup.se") )
+		if( System.IO.File.Exists("libcommsetup.so") )
 		{
 			Debug.Log("FILE EXIST");	
 		}
@@ -51,7 +52,7 @@ public class TestAndroid : MonoBehaviour {
 	void OnGUI () {
 		if (GUI.Button (new Rect (20,20,300,200), "I am a button")) {
 			print ("You clicked the button!");
-			Debug.Log("stringPtr = " +printLog());
+			printLog();
 		}
 		//GUI.TextArea(new Rect (20, 350, 300, 200), "TEXT");
 	}
