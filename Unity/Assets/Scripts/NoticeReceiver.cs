@@ -3,11 +3,15 @@ using System.Collections;
 
 public class NoticeReceiver : MonoBehaviour 
 {
-	private string testText = "";
+	private ulong smsGet;
+	private ulong smsSend;
+	
 	// Use this for initialization
 	void Start () 
 	{
-	
+		smsGet = 0;
+		smsSend = 0;
+		//pull save data from device and set smsGet/smsSet.
 	}
 	
 	// Update is called once per frame
@@ -18,23 +22,29 @@ public class NoticeReceiver : MonoBehaviour
 	
 	void OnGUI () 
 	{
-		// Make a background box
-		GUI.Box(new Rect(10,10,100,90), testText);
 	}
 	
-	void ReceiveNotification(string message)
+	void ReceiveNotification(string message)  //message is the format receivedCount|sentCount
 	{
-		switch(message)
+		//parse out, update, and save stats.
+		
+		//parse message
+		 string[]SMSStrings = message.Split('|');
+		
+		if(!ulong.TryParse(SMSStrings[0], out smsGet))
 		{
-		case "SMSin":
-			testText = "Holy crap, got a text.";
-			break;
-		case "SMSout":
-			testText = "Holy crap, sent a text.";
-			break;
-		default:
-			testText = "Something's wrong: Received message " + message;
-			break;
-		}	
+			//error, parse failed
+		}
+		
+		if(!ulong.TryParse(SMSStrings[1], out smsSend))
+		{
+			//error, parse failed
+		}
+		
+		//saving is platform-specific
+		if(Application.platform == RuntimePlatform.Android)
+		{
+			//update and save stats.
+		}
 	}
 }

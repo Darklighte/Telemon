@@ -12,7 +12,6 @@ public class TestLibMain extends UnityPlayerActivity
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_test_lib_main);
      
         //start listener code here
         Intent SMSInServiceIntent = new Intent();
@@ -26,5 +25,13 @@ public class TestLibMain extends UnityPlayerActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.test_lib_main, menu);
         return true;
+    }
+    
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+    	
+    	
     }
 }
