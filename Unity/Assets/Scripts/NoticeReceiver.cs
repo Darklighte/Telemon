@@ -22,6 +22,7 @@ public class NoticeReceiver : MonoBehaviour
 	
 	void OnGUI () 
 	{
+
 	}
 	
 	void ReceiveNotification(string message)  //message is the format receivedCount|sentCount
@@ -29,22 +30,28 @@ public class NoticeReceiver : MonoBehaviour
 		//parse out, update, and save stats.
 		
 		//parse message
-		 string[]SMSStrings = message.Split('|');
+		string[]SMSStrings = message.Split('|');
+		ulong tempGet = 0;
+		ulong tempSend = 0;
 		
-		if(!ulong.TryParse(SMSStrings[0], out smsGet))
+		if(!ulong.TryParse(SMSStrings[0], out tempGet))
 		{
 			//error, parse failed
 		}
 		
-		if(!ulong.TryParse(SMSStrings[1], out smsSend))
+		if(!ulong.TryParse(SMSStrings[1], out tempSend))
 		{
 			//error, parse failed
 		}
+		
+		smsGet += tempGet;
+		smsSend += tempSend;
 		
 		//saving is platform-specific
 		if(Application.platform == RuntimePlatform.Android)
 		{
 			//update and save stats.
+			
 		}
 	}
 }
