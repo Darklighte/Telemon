@@ -10,19 +10,36 @@ public class TestAndroid : MonoBehaviour {
 	private static extern void printLog();
 	
 	//public string touch;
+	
+	private readonly AndroidJavaClass _ActivityClass;
+	
 	//AndroidJavaClass unityPlayer = new AndroidJavaClass("com.rucks.testlib.TestLibMain");
 	//AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 
 	//AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 	
+//	public TestAndroid()
+//	{
+//		_ActivityClass = new AndroidJavaClass("com.rucks.testlib.TestLibMain");
+//	}
 	
 	
+//	AndroidJavaObject jo = new AndroidJavaObject("java.lang.String", "some_string"); 
+	AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 
 	
 	// Use this for initialization
 	void Start () {
-//		AndroidJNIHelper.debug = true; 
+		AndroidJNIHelper.debug = true; 
 //		using (AndroidJavaClass jc = new AndroidJavaClass("com.rucks.testlib.TestLibMain")) { 
 //			jc.CallStatic("UnitySendMessage", "Main Camera", "JavaMessage", "whoowhoo"); 
-//		} 
+//		}
+		
+//		using (AndroidJavaClass unityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer") )
+//		{
+//		   using (AndroidJavaObject activity = unityClass.GetStatic<AndroidJavaObject>("currentActivity") )
+//		   {    
+////		      activity.Call("startSensorService");       
+//		   }
+//		}
 		
 		if( System.IO.File.Exists("libcommsetup.so") )
 		{
