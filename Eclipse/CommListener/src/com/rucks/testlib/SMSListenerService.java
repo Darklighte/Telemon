@@ -19,11 +19,11 @@ import android.widget.Toast;
  */
 public class SMSListenerService extends Service 
 {
-
 	public static final String ACTION="android.provider.Telephony.SMS_RECEIVED";
 	private SMSListenerIn incomingSMSListener;
 	private ContentResolver contentResolver;
 	private SMSListenerOut outListener;
+
 	@Override
 	public IBinder onBind(Intent autoGenParam) 
 	{
@@ -31,12 +31,7 @@ public class SMSListenerService extends Service
 	}
 /**
  * Public methods
- */
-	public SMSListenerService()
-	{
-		
-	}
-	
+ */	
 	@Override
 	public void onCreate()
 	{

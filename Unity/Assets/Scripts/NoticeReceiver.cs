@@ -6,6 +6,22 @@ public class NoticeReceiver : MonoBehaviour
 	private ulong smsGet;
 	private ulong smsSend;
 	
+	public ulong SmsGet
+	{
+		get
+		{
+			return smsGet;
+		}
+	}
+	
+	public ulong SmsSend
+	{
+		get
+		{
+			return smsGet;
+		}	
+	}
+	
 	// Use this for initialization
 	void Start () 
 	{
