@@ -15,14 +15,31 @@ public class TestLibMain extends UnityPlayerActivity
 {	
 	public static final String SMS_RECEIVED ="android.provider.Telephony.SMS_RECEIVED";
 	
-	private static final String COUNT_DIFFS = "CountDiffsFile";
-	private static final String SMS_SENT = "SMSSent";
-	private static final String SMS_GOTTEN = "SMSReceived";
+	public static final String COUNT_DIFFS = "CountDiffsFile";
+	public static final String SMS_SENT = "SMSSent";
+	public static final String SMS_GOTTEN = "SMSReceived";
+	private BroadcastReceiver receiverSMS;
+	private Intent SMSListenerServiceIntent;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        
+        SMSListenerServiceIntent = new Intent(this, SMSListenerService.class);
+        
+    	receiverSMS = new BroadcastReceiver()
+        {
+    		@Override
+            public void onReceive(Context context, Intent intent)
+            {
+                 if (intent.getAction().equals(SMS_RECEIVED))
+                 {
+                	 String message = "1|0";
+                	 UnityPlayer.UnitySendMessage("PlatformBridge", "ReceiveNotification", message);
+                 }
+            }
+        };//Java is magic.
     }
 
     @Override
@@ -45,7 +62,8 @@ public class TestLibMain extends UnityPlayerActivity
     	long smsReceived = countDiffs.getLong(SMS_GOTTEN, 0);
     	long smsSent = countDiffs.getLong(SMS_SENT, 0);
     	
-    	//build and send message
+    	//build and send message that updates for all SMS transactions while the 
+    	//app was not open
     	message = Long.toString(smsReceived) + "|" + Long.toString(smsSent);
     	UnityPlayer.UnitySendMessage("PlatformBridge", "ReceiveNotification", message);
     	
@@ -60,19 +78,7 @@ public class TestLibMain extends UnityPlayerActivity
        	//start BroadcastReceiver that runs when app is running. 
     	//Should only need to track sms receiving during running application, because 
     	//if the person is playing our game they aren't sending texts, right?
-    	BroadcastReceiver receiverSMS = new BroadcastReceiver()
-        {
-    		@Override
-            public void onReceive(Context context, Intent intent)
-            {
-                 if (intent.getAction().equals(SMS_RECEIVED))
-                 {
-                	 String message = "1|0";
-                	 UnityPlayer.UnitySendMessage("PlatformBridge", "ReceiveNotification", message);
-                 }
-            }
-        };//Java is magic.
-    	
+        stopService(SMSListenerServiceIntent);
     	IntentFilter filter = new IntentFilter(SMS_RECEIVED);
         registerReceiver(receiverSMS, filter);
     }
@@ -83,9 +89,10 @@ public class TestLibMain extends UnityPlayerActivity
     	super.onPause();
     	
     	//kill listeners that run when app is running, 
+    	unregisterReceiver(receiverSMS);
+    	
     	//start listeners that run when app is closed.
-        //Intent SMSInServiceIntent = new Intent(this, SMSListenerService.class);
-        //SMSInServiceIntent.setAction(SMSListenerService.ACTION);
-        //startService(SMSInServiceIntent);
+        SMSListenerServiceIntent.setAction(SMSListenerService.ACTION);
+        startService(SMSListenerServiceIntent);
     } 
 }

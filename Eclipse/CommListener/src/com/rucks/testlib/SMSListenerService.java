@@ -1,12 +1,11 @@
 package com.rucks.testlib;
 
-import com.unity3d.player.UnityPlayer;
-
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
@@ -55,7 +54,7 @@ public class SMSListenerService extends Service
         //register outgoing sms contentobserver
         outListener = new SMSListenerOut(new Handler(), this);
         contentResolver = getContentResolver();
-        contentResolver.registerContentObserver(Uri.parse("content://sms"),true, outListener);
+        contentResolver.registerContentObserver(Uri.parse("content://sms/"),true, outListener);
 	}
 	
 	@Override
@@ -77,9 +76,13 @@ public class SMSListenerService extends Service
 	
 	private void notifyReceivedSMS() 
 	{
-		//this should eventually call Unity stuff.
-		// TODO: Call actual game stuff once this has been verified to work.
         Toast.makeText(this, "SMSCount++!", Toast.LENGTH_LONG).show();
-        UnityPlayer.UnitySendMessage("GameObjectName1", "MethodName1", "Message to send");
+        
+        //update count of SMS received.
+    	SharedPreferences countDiffs = getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
+    	long smsReceived = countDiffs.getLong(TestLibMain.SMS_GOTTEN, 0);
+    	SharedPreferences.Editor editor = countDiffs.edit();
+    	editor.putLong(TestLibMain.SMS_GOTTEN, ++smsReceived);
+    	editor.commit();
     }
 }

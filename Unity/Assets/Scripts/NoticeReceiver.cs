@@ -18,7 +18,7 @@ public class NoticeReceiver : MonoBehaviour
 	{
 		get
 		{
-			return smsGet;
+			return smsSend;
 		}	
 	}
 	
