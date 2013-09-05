@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
@@ -73,7 +74,7 @@ public class TestLibMain extends UnityPlayerActivity
     	editor.putLong(SMS_SENT, 0);
     	editor.commit();
     	
-
+    	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     	
        	//start BroadcastReceiver that runs when app is running. 
     	//Should only need to track sms receiving during running application, because 

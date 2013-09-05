@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 public class SMSListenerOut extends ContentObserver 
 {
-	Handler handler;
-	Service listeningService;
+	private Service listeningService;
+	
+	private static int count = 0;
+	private static final int MESSAGE_TYPE_SENT = 2;
 	public SMSListenerOut(Handler handler, Service parentService) 
 	{
 		super(handler);
@@ -25,19 +27,26 @@ public class SMSListenerOut extends ContentObserver
         super.onChange(selfChange);
 
         Uri uriSMSURI = Uri.parse("content://sms/");
-        ContentResolver resolver = listeningService.getContentResolver();
         
         Cursor cur = listeningService.getContentResolver().query(uriSMSURI, null, null, null, null);
-        cur.moveToNext();
-        String protocol = cur.getString(cur.getColumnIndex("protocol"));
-        if(protocol == null)
+        
+        if (cur.moveToNext()) 
         {
-        	SharedPreferences countDiffs = listeningService.getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
-        	long smsReceived = countDiffs.getLong(TestLibMain.SMS_SENT, 0);
-        	SharedPreferences.Editor editor = countDiffs.edit();
-        	editor.putLong(TestLibMain.SMS_SENT, ++smsReceived);
-        	editor.commit();
-        	Toast.makeText(listeningService.getApplicationContext(), cur.toString(), Toast.LENGTH_SHORT).show();
-        }
+        	count++;
+			String protocol = cur.getString(cur.getColumnIndex("protocol"));
+			int type = cur.getInt(cur.getColumnIndex("type"));
+			// Only processing outgoing sms event & only when it
+			// is sent successfully (available in SENT box).
+			if (protocol != null || type != MESSAGE_TYPE_SENT) 
+			{
+				SharedPreferences countDiffs = listeningService.getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
+            	long smsReceived = countDiffs.getLong(TestLibMain.SMS_SENT, 0);
+            	SharedPreferences.Editor editor = countDiffs.edit();
+            	editor.putLong(TestLibMain.SMS_SENT, ++smsReceived);
+            	editor.commit();
+            	Toast.makeText(listeningService.getApplicationContext(), ""+count, Toast.LENGTH_SHORT).show();
+			}
+		}
+        cur.close();
     }
 }
