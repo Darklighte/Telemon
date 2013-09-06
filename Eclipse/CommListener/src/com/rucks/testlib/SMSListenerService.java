@@ -76,7 +76,7 @@ public class SMSListenerService extends Service
 	
 	private void notifyReceivedSMS() 
 	{
-        Toast.makeText(this, "SMSCount++!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Detected incoming SMS", Toast.LENGTH_LONG).show();
         
         //update count of SMS received.
     	SharedPreferences countDiffs = getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	

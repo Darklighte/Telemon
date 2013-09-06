@@ -2,32 +2,14 @@
 using System.Collections;
 
 public class NoticeReceiver : MonoBehaviour 
-{
-	private ulong smsGet;
-	private ulong smsSend;
-	
-	public ulong SmsGet
-	{
-		get
-		{
-			return smsGet;
-		}
-	}
-	
-	public ulong SmsSend
-	{
-		get
-		{
-			return smsSend;
-		}	
-	}
+{	
+	private CreatureScript creature;
 	
 	// Use this for initialization
 	void Start () 
 	{
-		smsGet = 0;
-		smsSend = 0;
-		//pull save data from device and set smsGet/smsSet.
+		//reference to PlatformBridge once, and hold it so we only have to get it once
+		creature = (CreatureScript)GameObject.Find("Creature").GetComponent("CreatureScript");
 	}
 	
 	// Update is called once per frame
@@ -60,14 +42,8 @@ public class NoticeReceiver : MonoBehaviour
 			//error, parse failed
 		}
 		
-		smsGet += tempGet;
-		smsSend += tempSend;
-		
-		//saving is platform-specific
-		if(Application.platform == RuntimePlatform.Android)
-		{
-			//update and save stats.
-			
-		}
+		//Did it this way because attacks being outgoing and defense against incoming things made sense.
+		creature.Attack += tempSend;
+		creature.Defense += tempGet;
 	}
 }

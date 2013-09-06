@@ -74,7 +74,7 @@ public class TestLibMain extends UnityPlayerActivity
     	editor.putLong(SMS_SENT, 0);
     	editor.commit();
     	
-    	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     	
        	//start BroadcastReceiver that runs when app is running. 
     	//Should only need to track sms receiving during running application, because 

@@ -32,19 +32,17 @@ public class SMSListenerOut extends ContentObserver
         
         if (cur.moveToNext()) 
         {
-        	count++;
-			String protocol = cur.getString(cur.getColumnIndex("protocol"));
 			int type = cur.getInt(cur.getColumnIndex("type"));
 			// Only processing outgoing sms event & only when it
 			// is sent successfully (available in SENT box).
-			if (protocol != null || type != MESSAGE_TYPE_SENT) 
+			if (/*protocol != null &&*/ type == MESSAGE_TYPE_SENT) 
 			{
+				Toast.makeText(listeningService, "Detected outgoing SMS", Toast.LENGTH_LONG).show();
 				SharedPreferences countDiffs = listeningService.getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
             	long smsReceived = countDiffs.getLong(TestLibMain.SMS_SENT, 0);
             	SharedPreferences.Editor editor = countDiffs.edit();
             	editor.putLong(TestLibMain.SMS_SENT, ++smsReceived);
             	editor.commit();
-            	Toast.makeText(listeningService.getApplicationContext(), ""+count, Toast.LENGTH_SHORT).show();
 			}
 		}
         cur.close();
