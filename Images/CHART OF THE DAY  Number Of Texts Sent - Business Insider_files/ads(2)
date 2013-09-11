@@ -1,0 +1,29 @@
+{
+
+var google_ads = new Array();
+var google_ad;
+var google_radlinks = new Array();
+var google_radlink;
+var google_info = new Object();
+google_ad = {}; 
+google_ad.n = 1; 
+google_ad.type = "text"; 
+google_ad.bidtype = "CPC"; 
+google_ad.targeting_type = "contextual"; 
+google_ad.url = "http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CPxlrjhguUoXSOdGBqwHwuYHYDIiKuagDgLTVlSSKidj3KhABIPnd7hNQv_v1rAVgyf6yh9yj3BCgAajAke0DyAEBqAMBqgSfAU_Qcdy9Fy7FtzMMfM2ukfGajORm53f_ngqE-07TUuZPO7LJaKOuBn__lRsrkZMCJpcnxhpXoAM9l4wXz6PErvY9SYexZkPEVocTY63w5ukRCDZovGOIbx6s_Ivh5b_gy9JoBePx3OggfkcQrN1YCVVr3dCAr3RJWv9omTd5OdDqTaqjCFr41a8J5kdw11Ov80szff-iI5Ty2Pl1UqbLz4gGAYAHwL_uEg&amp;num=1&amp;cid=5GhJyLYALb9LF6yR81SNB3gU&amp;sig=AOD64_1byXoc9aFQjAyPyo7BsGAjHVNVpg&amp;client=ca-pub-0853316492547121&amp;adurl=http://ad.doubleclick.net/clk%3B255055200%3B78760736%3Bh"; 
+google_ad.visible_url = "GYBO.com/Florida"; 
+google_ad.line1 = "Website for Your Business"; 
+google_ad.line2 = "Get a Free Professional Website"; 
+google_ad.line3 = "with Google and Be Found Online!"; 
+google_ad.regionname = ""; 
+google_ads[0] = google_ad; 
+google_info.feedback_url = "http://www.google.com/url?ct\x3dabg\x26q\x3dhttps://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.businessinsider.com/chart-of-the-day-number-of-texts-sent-2013-3%26gl%3DUS%26hl%3Den%26client%3Dca-pub-0853316492547121%26ai0%3DCPxlrjhguUoXSOdGBqwHwuYHYDIiKuagDgLTVlSSKidj3KhABIPnd7hNQv_v1rAVgyf6yh9yj3BCgAajAke0DyAEBqAMBqgSfAU_Qcdy9Fy7FtzMMfM2ukfGajORm53f_ngqE-07TUuZPO7LJaKOuBn__lRsrkZMCJpcnxhpXoAM9l4wXz6PErvY9SYexZkPEVocTY63w5ukRCDZovGOIbx6s_Ivh5b_gy9JoBePx3OggfkcQrN1YCVVr3dCAr3RJWv9omTd5OdDqTaqjCFr41a8J5kdw11Ov80szff-iI5Ty2Pl1UqbLz4gGAYAHwL_uEg\x26usg\x3dAFQjCNEEbI0BZsm47mrGEneT2Q_3wP__oQ";
+var google_attribution_text = "AdChoices";
+var google_is_rtl = false;
+if (window.google_ad_request_done) {
+google_ad_request_done(google_ads);
+}
+if (window.google_radlink_request_done) {
+google_radlink_request_done(google_radlinks);
+}
+}
