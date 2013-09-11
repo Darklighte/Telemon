@@ -207,8 +207,10 @@ develop-eggs/
 # Unity .gitignore file.
 ########################
 .DS_Store
-Library
-Library/*
+/Library/FailedAssetImports.txt
+/Library/cache/
+/Library/previews/
+/Library/ScriptAssemblies
 *.csproj
 *.sln
 *.userprefs
