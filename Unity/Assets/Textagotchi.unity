@@ -85,7 +85,7 @@ GameObject:
   - 33: {fileID: 164469929}
   - 65: {fileID: 164469928}
   - 23: {fileID: 164469927}
-  - 114: {fileID: 164469931}
+  - 114: {fileID: 164469932}
   m_Layer: 0
   m_Name: Creature
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Transform:
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &164469931
+--- !u!114 &164469932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 164469926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95af507dc62cfac4d9798263b8839e1e, type: 3}
+  m_Script: {fileID: 11500000, guid: a3eafdb063ba858428f6850839e74fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &870637769
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 870637770}
-  - 114: {fileID: 870637771}
+  - 114: {fileID: 870637772}
   m_Layer: 0
   m_Name: PlatformBridge
   m_TagString: System
@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &870637771
+--- !u!114 &870637772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 870637769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d4d2c6f300a9a4caf179895049b46b, type: 3}
+  m_Script: {fileID: 11500000, guid: 40acbe8da87c7104db22fd2972d534c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &900235405
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 900235406}
-  - 114: {fileID: 900235407}
+  - 114: {fileID: 900235408}
   m_Layer: 0
   m_Name: GUI
   m_TagString: Untagged
@@ -217,7 +217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &900235407
+--- !u!114 &900235408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -225,9 +225,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 900235405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96eb2872b32123049ab4ac7fab09b33f, type: 3}
+  m_Script: {fileID: 11500000, guid: cfcb77e4764144242b3592e79f40ac88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serviceToggle: 0
 --- !u!1 &971001841
 GameObject:
   m_ObjectHideFlags: 0
