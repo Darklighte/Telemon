@@ -6,14 +6,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
+//import android.widget.Toast;
+
 
 import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
 
 public class TestLibMain extends UnityPlayerActivity 
-{	
+{		
 	public static final String SMS_RECEIVED ="android.provider.Telephony.SMS_RECEIVED";
 	
 	public static final String COUNT_DIFFS = "CountDiffsFile";
@@ -22,10 +24,15 @@ public class TestLibMain extends UnityPlayerActivity
 	private BroadcastReceiver receiverSMS;
 	private Intent SMSListenerServiceIntent;
 	
+	//private int canISetThis;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
+        
+    	Log.w("JavaPlugin", "onCreate");
+    	//System.loadLibrary("javabridge");
         
         SMSListenerServiceIntent = new Intent(this, SMSListenerService.class);
         

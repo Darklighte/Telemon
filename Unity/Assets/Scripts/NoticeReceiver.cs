@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 public class NoticeReceiver : MonoBehaviour 
 {	
 	private CreatureScript creature;
 	
+	/*[DllImport("javabridge")]
+	private static extern void SetNumber(int val);
+	
+	[DllImport("javabridge")]
+	private static extern int GetNumber();
+	
+	*/
 	// Use this for initialization
 	void Start () 
 	{
 		//reference to PlatformBridge once, and hold it so we only have to get it once
 		creature = (CreatureScript)GameObject.Find("Creature").GetComponent("CreatureScript");
+		
+		//SetNumber (42);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		//number = GetNumber();
 	}
 	
 	void OnGUI () 
 	{
-
 	}
 	
 	void ReceiveNotification(string message)  //message is the format receivedCount|sentCount
