@@ -21,6 +21,7 @@ public class CreatureScript : MonoBehaviour {
 		{
 			atk = value;
 			SaveStats();
+			Grow ();
 		}
 	}
 	
@@ -34,6 +35,7 @@ public class CreatureScript : MonoBehaviour {
 		{
 			def = value;
 			SaveStats();
+			Grow();
 		}
 	}
 	
@@ -71,6 +73,13 @@ public class CreatureScript : MonoBehaviour {
 			PlayerPrefs.SetString("Defense", Convert.ToBase64String(memStream.GetBuffer()));
 			memStream.Close();
 			*/
+			
+			//save tranforms
 		}
+	}
+	
+	private void Grow()
+	{
+		transform.localScale += new Vector3(.1f,.1f,.1f);
 	}
 }
