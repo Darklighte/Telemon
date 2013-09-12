@@ -11,6 +11,8 @@ import android.view.Menu;
 //import android.widget.Toast;
 
 
+import android.widget.Toast;
+
 import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -24,15 +26,16 @@ public class TestLibMain extends UnityPlayerActivity
 	private BroadcastReceiver receiverSMS;
 	private Intent SMSListenerServiceIntent;
 	
-	//private int canISetThis;
+	private boolean usingListeners;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        
+        usingListeners = false; //starts false by default
     	Log.w("JavaPlugin", "onCreate");
-    	//System.loadLibrary("javabridge");
+    	
+    	System.loadLibrary("javabridge");
         
         SMSListenerServiceIntent = new Intent(this, SMSListenerService.class);
         
@@ -83,12 +86,15 @@ public class TestLibMain extends UnityPlayerActivity
     	
     	//Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     	
-       	//start BroadcastReceiver that runs when app is running. 
     	//Should only need to track sms receiving during running application, because 
     	//if the person is playing our game they aren't sending texts, right?
         stopService(SMSListenerServiceIntent);
-    	IntentFilter filter = new IntentFilter(SMS_RECEIVED);
-        registerReceiver(receiverSMS, filter);
+        if(usingListeners)
+        {
+           	//start BroadcastReceiver that runs when app is running. 
+        	IntentFilter filter = new IntentFilter(SMS_RECEIVED);
+            registerReceiver(receiverSMS, filter);
+        }
     }
     
     @Override
@@ -99,8 +105,42 @@ public class TestLibMain extends UnityPlayerActivity
     	//kill listeners that run when app is running, 
     	unregisterReceiver(receiverSMS);
     	
-    	//start listeners that run when app is closed.
-        SMSListenerServiceIntent.setAction(SMSListenerService.ACTION);
-        startService(SMSListenerServiceIntent);
+    	if(usingListeners)
+    	{
+        	//start listeners that run when app is closed.
+            SMSListenerServiceIntent.setAction(SMSListenerService.ACTION);
+            startService(SMSListenerServiceIntent);
+    	}
     } 
+    
+    public void enableServiceListeners()
+    {
+    	usingListeners = true;
+    	//start listener that runs while app is running
+    	IntentFilter filter = new IntentFilter(SMS_RECEIVED);
+    	registerReceiver(receiverSMS, filter);
+
+        runOnUiThread(new Runnable()
+        {
+            public void run()
+            {
+            	Toast.makeText(getApplicationContext(), "Background Services have been enabled.", Toast.LENGTH_SHORT).show();
+            }
+        });  
+    }
+    
+    public void disableServiceListeners()
+    {
+    	usingListeners = false;
+    	//kill listeners that run when app is running, 
+    	unregisterReceiver(receiverSMS);
+    	
+    	runOnUiThread(new Runnable()
+        {
+            public void run()
+            {
+            	Toast.makeText(getApplicationContext(), "Background services have been disabled.", Toast.LENGTH_SHORT).show();
+            }
+        }); 
+    }
 }

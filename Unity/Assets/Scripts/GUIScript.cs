@@ -4,14 +4,16 @@ using System.Collections;
 public class GUIScript : MonoBehaviour {
 	
 	private CreatureScript creature;
+	private NoticeReceiver platformBridge;
 	public bool serviceToggle;
 	private bool displayPrivacyPolicy;
-	
+		
 	// Use this for initialization
 	void Start () 
 	{
 		//Get a reference to the creature and hold it so we only have to get it once
 		creature =  (CreatureScript)GameObject.Find("Creature").GetComponent("CreatureScript");
+		platformBridge = (NoticeReceiver)GameObject.Find("PlatformBridge").GetComponent("NoticeReceiver");
 		
 		// Assume the service is off when we start.
 		// This should be initialized to the previously-set value.
@@ -79,6 +81,7 @@ public class GUIScript : MonoBehaviour {
 			if(GUI.Button(new Rect(leftBtn + widthBtn, topBtn, widthBtn, heightBtn), "Service is On"))
 			{
 				serviceToggle = !serviceToggle;
+				platformBridge.ToggleListeners(serviceToggle);
 			}
 		}
 		else
@@ -87,6 +90,7 @@ public class GUIScript : MonoBehaviour {
 			if(GUI.Button(new Rect(leftBtn + widthBtn, topBtn, widthBtn, heightBtn), "Service is Off"))
 			{
 				serviceToggle = !serviceToggle;
+				platformBridge.ToggleListeners(serviceToggle);
 			}
 		}
 		

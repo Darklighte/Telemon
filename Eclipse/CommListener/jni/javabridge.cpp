@@ -46,6 +46,33 @@ extern "C"
 	}
 
 
+	JNIEXPORT void JNICALL ToggleListenersNative(bool toggleSetting)
+	{
+		//reacquire environment
+		JNIEnv* jni_env = 0;
+		java_vm->AttachCurrentThread(&jni_env, 0);
+
+		if(toggleSetting)
+		{
+			jmethodID enableMethodID = jni_env->GetMethodID(mainActivityClass, "enableServiceListeners", "()V");
+			if(enableMethodID != NULL)
+			{
+				__android_log_print(ANDROID_LOG_INFO, "JavaBridge", "[%s]Found enable method.", __FUNCTION__);
+			}
+			jni_env->CallVoidMethod(mainActivityObj, enableMethodID);
+		}
+		else
+		{
+			jmethodID disableMethodID = jni_env->GetMethodID(mainActivityClass, "disableServiceListeners", "()V");
+			if(disableMethodID != NULL)
+			{
+				__android_log_print(ANDROID_LOG_INFO, "JavaBridge", "[%s]Found disable method.", __FUNCTION__);
+			}
+			jni_env->CallVoidMethod(mainActivityObj, disableMethodID);
+		}
+	}
+
+	/*
 	JNIEXPORT void JNICALL SetNumber(int val)
 	{
 		//reacquire environment
@@ -79,4 +106,5 @@ extern "C"
 
 		return 0;
 	}
+	*/
 }

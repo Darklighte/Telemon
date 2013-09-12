@@ -13,6 +13,10 @@ public class NoticeReceiver : MonoBehaviour
 	private static extern int GetNumber();
 	
 	*/
+	
+	[DllImport("javabridge")]
+	private static extern void ToggleListenersNative(bool toggleValue);
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -54,5 +58,10 @@ public class NoticeReceiver : MonoBehaviour
 		//Did it this way because attacks being outgoing and defense against incoming things made sense.
 		creature.Attack += tempSend;
 		creature.Defense += tempGet;
+	}
+	
+	public void ToggleListeners(bool toggleValue)
+	{
+		ToggleListenersNative(toggleValue);
 	}
 }
