@@ -7,6 +7,8 @@ public class GUIScript : MonoBehaviour {
 	private NoticeReceiver platformBridge;
 	public bool serviceToggle;
 	private bool displayPrivacyPolicy;
+	
+	public GUISkin customSkin;
 		
 	// Use this for initialization
 	void Start () 
@@ -31,6 +33,7 @@ public class GUIScript : MonoBehaviour {
 	
 	void OnGUI()
 	{
+		GUI.skin = customSkin;
 		int width = Screen.width;
 		int height = Screen.height / 8;
 		int widthDiv2 = Screen.width / 2;
@@ -81,7 +84,10 @@ public class GUIScript : MonoBehaviour {
 			if(GUI.Button(new Rect(leftBtn + widthBtn, topBtn, widthBtn, heightBtn), "Service is On"))
 			{
 				serviceToggle = !serviceToggle;
-				platformBridge.ToggleListeners(serviceToggle);
+				if(Application.platform == RuntimePlatform.Android)
+				{
+					platformBridge.ToggleListeners(serviceToggle);
+				}
 			}
 		}
 		else
@@ -90,7 +96,10 @@ public class GUIScript : MonoBehaviour {
 			if(GUI.Button(new Rect(leftBtn + widthBtn, topBtn, widthBtn, heightBtn), "Service is Off"))
 			{
 				serviceToggle = !serviceToggle;
-				platformBridge.ToggleListeners(serviceToggle);
+				if(Application.platform == RuntimePlatform.Android)
+				{
+					platformBridge.ToggleListeners(serviceToggle);
+				}
 			}
 		}
 		
@@ -109,6 +118,6 @@ public class GUIScript : MonoBehaviour {
 				"You should probably be more worried about Google doing that.");
 		}
 		
-		GUI.Box(new Rect(left, top, width, height), "\nStats\n\nAttack: " + creature.Attack + "\nDefense: " + creature.Defense);
+		GUI.Box(new Rect(left, top, width, height), "Attack: " + creature.Attack + "\nDefense: " + creature.Defense);
 	}
 }
