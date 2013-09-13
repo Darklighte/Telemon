@@ -86,11 +86,12 @@ public class TestLibMain extends UnityPlayerActivity
     	
     	//Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     	
-    	//Should only need to track sms receiving during running application, because 
-    	//if the person is playing our game they aren't sending texts, right?
-        stopService(SMSListenerServiceIntent);
+
         if(usingListeners)
         {
+        	//Should only need to track sms receiving during running application, because 
+        	//if the person is playing our game they aren't sending texts, right?
+            stopService(SMSListenerServiceIntent);
            	//start BroadcastReceiver that runs when app is running. 
         	IntentFilter filter = new IntentFilter(SMS_RECEIVED);
             registerReceiver(receiverSMS, filter);
@@ -102,11 +103,11 @@ public class TestLibMain extends UnityPlayerActivity
     {
     	super.onPause();
     	
-    	//kill listeners that run when app is running, 
-    	unregisterReceiver(receiverSMS);
-    	
     	if(usingListeners)
     	{
+    		//kill listeners that run when app is running, 
+        	unregisterReceiver(receiverSMS);
+        	
         	//start listeners that run when app is closed.
             SMSListenerServiceIntent.setAction(SMSListenerService.ACTION);
             startService(SMSListenerServiceIntent);

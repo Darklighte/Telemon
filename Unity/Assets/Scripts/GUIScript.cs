@@ -113,9 +113,16 @@ public class GUIScript : MonoBehaviour {
 		if(displayPrivacyPolicy)
 		{
 			GUI.Box(new Rect(leftPriv, topPriv, widthPriv, heightPriv), 
-				"Privacy Policy:\n" +
-				"We're not dicks and not tracking your data personally.\n" +
-				"You should probably be more worried about Google doing that.");
+				"Privacy Policy:\n\n" +
+				//"We're not dicks and not tracking your data personally.\n" +
+				//"You should probably be more worried about Google doing that.");
+				"By continuing to use this app, you agree to this privacy policy.\n" + 
+				"This app counts sent and received SMS messages (text messages.)\n" + 
+				"We do not read the contents of emails, texts, contact lists,\nor any other private data on your phone.\n" +
+				"We do not in any way personally identify you or your device.\n"+
+				"All data gathered by this app is stored locally on your phone only. We do not track this data.\n"+
+				"This policy is subject to change as new features are added.\n" +
+				"Last updated: September 13, 2013", "LegaleseBox");
 		}
 		
 		GUI.Box(new Rect(left, top, width, height), "Attack: " + creature.Attack + "\nDefense: " + creature.Defense);
