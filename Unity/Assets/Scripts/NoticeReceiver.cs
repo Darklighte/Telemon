@@ -6,24 +6,15 @@ public class NoticeReceiver : MonoBehaviour
 {	
 	private CreatureScript creature;
 	
-	/*[DllImport("javabridge")]
-	private static extern void SetNumber(int val);
-	
-	[DllImport("javabridge")]
-	private static extern int GetNumber();
-	
-	*/
-	
 	[DllImport("javabridge")]
 	private static extern void ToggleListenersNative(bool toggleValue);
 	
 	// Use this for initialization
 	void Start () 
 	{
-		//reference to PlatformBridge once, and hold it so we only have to get it once
+		//reference to CreatureScript once, and hold it so we only have to get it once
 		creature = (CreatureScript)GameObject.Find("Creature").GetComponent("CreatureScript");
 		
-		//SetNumber (42);
 	}
 	
 	// Update is called once per frame

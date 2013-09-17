@@ -11,6 +11,9 @@ public class CreatureScript : MonoBehaviour {
 	private	ulong def = 0;
 	private string creatureName;
 	
+	private const string ATK = "Attack";
+	private const string DEF = "Defense";
+	
 	public ulong Attack
 	{
 		get
@@ -43,6 +46,10 @@ public class CreatureScript : MonoBehaviour {
 	void Start () 
 	{
 		//load stats from playerprefs
+		LoadStats();
+		
+		//grow once so that we can set the scale
+		Grow ();
 	}
 	
 	// Update is called once per frame
@@ -54,37 +61,34 @@ public class CreatureScript : MonoBehaviour {
 	{
 		//saving is platform-specific
 		if(Application.platform == RuntimePlatform.Android)
+		{			
+			PlayerPrefs.SetString(ATK, atk.ToString());
+			PlayerPrefs.SetString(DEF, def.ToString());
+		}
+	}
+	
+	private void LoadStats()
+	{
+		if(Application.platform == RuntimePlatform.Android)
 		{
-			//Commented out until we're sure the base functionality is working, 
-			//because it's much easier to test when your count starts over from 0 every time you push a new build.
-			
-			/*
-			//Get a binary formatter
-   			BinaryFormatter binFormatter = new BinaryFormatter();
-			
-    		//Create an in memory stream
-		    MemoryStream memStream = new MemoryStream();
-			
-		    //PlayerPrefs can store strings, so convert serialized ulongs into strings and save them.
-		    binFormatter.Serialize(memStream, atk);
-		    PlayerPrefs.SetString("Attack", Convert.ToBase64String(memStream.GetBuffer()));
-			binFormatter.Serialize(memStream, def);
-			memStream.Flush();
-			PlayerPrefs.SetString("Defense", Convert.ToBase64String(memStream.GetBuffer()));
-			memStream.Close();
-			*/
-			
-			//save tranforms
+			atk = ulong.Parse(PlayerPrefs.GetString(ATK, "0"));
+			def = ulong.Parse(PlayerPrefs.GetString(DEF, "0"));
+		}
+		else{
+			atk = 0;
+			def = 0;
 		}
 	}
 	
 	private void Grow()
 	{
-		if(Attack == 0 && Defense == 0)
+		/*if(Attack == 0 && Defense == 0)
 		{
 			transform.localScale = new Vector3(1f,1f,1f);
 		}
-		transform.localScale += new Vector3(.1f,.1f,.1f);
+		transform.localScale += new Vector3(.1f,.1f,.1f);*/
 		
+		float scale = 1 + ((atk + def) * 0.1f);
+		transform.localScale = new Vector3(scale, scale, scale);
 	}
 }
