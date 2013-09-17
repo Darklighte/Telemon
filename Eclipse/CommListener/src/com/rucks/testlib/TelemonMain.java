@@ -19,7 +19,7 @@ import com.unity3d.player.UnityPlayerActivity;
 public class TelemonMain extends UnityPlayerActivity 
 {		
 	public static final String SMS_RECEIVED ="android.provider.Telephony.SMS_RECEIVED";
-	
+	public static final String USING_LISTENERS = "usingListeners";
 	public static final String COUNT_DIFFS = "CountDiffsFile";
 	public static final String SMS_SENT = "SMSSent";
 	public static final String SMS_GOTTEN = "SMSReceived";
@@ -32,7 +32,6 @@ public class TelemonMain extends UnityPlayerActivity
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        usingListeners = false; //starts false by default
     	Log.w("JavaPlugin", "onCreate");
     	
     	System.loadLibrary("javabridge");
@@ -72,6 +71,7 @@ public class TelemonMain extends UnityPlayerActivity
     	SharedPreferences countDiffs = getSharedPreferences(COUNT_DIFFS, 0);   	
     	long smsReceived = countDiffs.getLong(SMS_GOTTEN, 0);
     	long smsSent = countDiffs.getLong(SMS_SENT, 0);
+    	usingListeners = countDiffs.getBoolean(USING_LISTENERS, true);
     	
     	//build and send message that updates for all SMS transactions while the 
     	//app was not open
@@ -102,6 +102,11 @@ public class TelemonMain extends UnityPlayerActivity
     protected void onPause()
     {
     	super.onPause();
+    	
+    	SharedPreferences countDiffs = getSharedPreferences(COUNT_DIFFS, 0); 
+    	SharedPreferences.Editor editor = countDiffs.edit();
+    	editor.putBoolean(USING_LISTENERS, usingListeners);
+    	editor.commit();
     	
     	if(usingListeners)
     	{
