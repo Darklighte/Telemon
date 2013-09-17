@@ -79,10 +79,10 @@ public class SMSListenerService extends Service
         Toast.makeText(this, "Detected incoming SMS", Toast.LENGTH_LONG).show();
         
         //update count of SMS received.
-    	SharedPreferences countDiffs = getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
-    	long smsReceived = countDiffs.getLong(TestLibMain.SMS_GOTTEN, 0);
+    	SharedPreferences countDiffs = getSharedPreferences(TelemonMain.COUNT_DIFFS, 0);   	
+    	long smsReceived = countDiffs.getLong(TelemonMain.SMS_GOTTEN, 0);
     	SharedPreferences.Editor editor = countDiffs.edit();
-    	editor.putLong(TestLibMain.SMS_GOTTEN, ++smsReceived);
+    	editor.putLong(TelemonMain.SMS_GOTTEN, ++smsReceived);
     	editor.commit();
     }
 }

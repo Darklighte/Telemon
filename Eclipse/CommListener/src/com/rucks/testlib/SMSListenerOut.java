@@ -1,7 +1,6 @@
 package com.rucks.testlib;
 
 import android.app.Service;
-import android.content.ContentResolver;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -13,7 +12,6 @@ public class SMSListenerOut extends ContentObserver
 {
 	private Service listeningService;
 	
-	private static int count = 0;
 	private static final int MESSAGE_TYPE_SENT = 2;
 	public SMSListenerOut(Handler handler, Service parentService) 
 	{
@@ -38,10 +36,10 @@ public class SMSListenerOut extends ContentObserver
 			if (/*protocol != null &&*/ type == MESSAGE_TYPE_SENT) 
 			{
 				Toast.makeText(listeningService, "Detected outgoing SMS", Toast.LENGTH_LONG).show();
-				SharedPreferences countDiffs = listeningService.getSharedPreferences(TestLibMain.COUNT_DIFFS, 0);   	
-            	long smsReceived = countDiffs.getLong(TestLibMain.SMS_SENT, 0);
+				SharedPreferences countDiffs = listeningService.getSharedPreferences(TelemonMain.COUNT_DIFFS, 0);   	
+            	long smsReceived = countDiffs.getLong(TelemonMain.SMS_SENT, 0);
             	SharedPreferences.Editor editor = countDiffs.edit();
-            	editor.putLong(TestLibMain.SMS_SENT, ++smsReceived);
+            	editor.putLong(TelemonMain.SMS_SENT, ++smsReceived);
             	editor.commit();
 			}
 		}

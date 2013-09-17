@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.unity3d.player.UnityPlayer;
 import com.unity3d.player.UnityPlayerActivity;
 
-public class TestLibMain extends UnityPlayerActivity 
+public class TelemonMain extends UnityPlayerActivity 
 {		
 	public static final String SMS_RECEIVED ="android.provider.Telephony.SMS_RECEIVED";
 	
