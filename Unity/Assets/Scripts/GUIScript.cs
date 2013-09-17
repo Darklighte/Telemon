@@ -7,7 +7,7 @@ public class GUIScript : MonoBehaviour {
 	private NoticeReceiver platformBridge;
 	public bool serviceToggle;
 	private bool displayPrivacyPolicy;
-	
+	private const string SERVICE_TOGGLE = "serviceToggle";
 	public GUISkin customSkin;
 		
 	// Use this for initialization
@@ -17,9 +17,8 @@ public class GUIScript : MonoBehaviour {
 		creature =  (CreatureScript)GameObject.Find("Creature").GetComponent("CreatureScript");
 		platformBridge = (NoticeReceiver)GameObject.Find("PlatformBridge").GetComponent("NoticeReceiver");
 		
-		// Assume the service is off when we start.
-		// This should be initialized to the previously-set value.
-		serviceToggle = false;
+		// Assume the service is on when we start if there is no saved value.
+		serviceToggle = (1 == PlayerPrefs.GetInt(SERVICE_TOGGLE, 1));
 		
 		// Don't display the privacy policy at start.
 		displayPrivacyPolicy = false;
@@ -87,6 +86,7 @@ public class GUIScript : MonoBehaviour {
 				if(Application.platform == RuntimePlatform.Android)
 				{
 					platformBridge.ToggleListeners(serviceToggle);
+					SavePrefs();
 				}
 			}
 		}
@@ -99,6 +99,7 @@ public class GUIScript : MonoBehaviour {
 				if(Application.platform == RuntimePlatform.Android)
 				{
 					platformBridge.ToggleListeners(serviceToggle);
+					SavePrefs();
 				}
 			}
 		}
@@ -126,5 +127,11 @@ public class GUIScript : MonoBehaviour {
 		}
 		
 		GUI.Box(new Rect(left, top, width, height), "Attack: " + creature.Attack + "\nDefense: " + creature.Defense);
+	}
+	
+	private void SavePrefs()
+	{
+		//save as a 1 if true, 0 if false
+		PlayerPrefs.SetInt(SERVICE_TOGGLE, serviceToggle ? 1 : 0);
 	}
 }

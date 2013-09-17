@@ -69,7 +69,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.rucks.testlib
+  iPhoneBundleIdentifier: com.nomoargames.telemon
   productGUID: fd10d46fccec2ba4e9ec3dab4eef1e32
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
