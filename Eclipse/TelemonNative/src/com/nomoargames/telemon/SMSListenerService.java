@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
 
 /**
  * @name SMSListenerService
@@ -75,9 +74,7 @@ public class SMSListenerService extends Service
 	}
 	
 	private void notifyReceivedSMS() 
-	{
-        Toast.makeText(this, "Detected incoming SMS", Toast.LENGTH_LONG).show();
-        
+	{        
         //update count of SMS received.
     	SharedPreferences countDiffs = getSharedPreferences(TelemonMain.COUNT_DIFFS, 0);   	
     	long smsReceived = countDiffs.getLong(TelemonMain.SMS_GOTTEN, 0);
