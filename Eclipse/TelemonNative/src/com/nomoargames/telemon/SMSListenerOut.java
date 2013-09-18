@@ -6,6 +6,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
+import android.widget.Toast;
 
 public class SMSListenerOut extends ContentObserver 
 {
@@ -34,6 +35,7 @@ public class SMSListenerOut extends ContentObserver
 			// is sent successfully (available in SENT box).
 			if (/*protocol != null &&*/ type == MESSAGE_TYPE_SENT) 
 			{
+				Toast.makeText(listeningService, "Detected outgoing SMS", Toast.LENGTH_LONG).show();
 				SharedPreferences countDiffs = listeningService.getSharedPreferences(TelemonMain.COUNT_DIFFS, 0);   	
             	long smsReceived = countDiffs.getLong(TelemonMain.SMS_SENT, 0);
             	SharedPreferences.Editor editor = countDiffs.edit();
